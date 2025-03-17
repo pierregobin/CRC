@@ -52,6 +52,20 @@ def compute_using_carryless_CRC(m):
     print("CRC carryless = ", CRC)
     print("================\n")
 
+def poly2hex(p):
+    l = p.list()
+    l.reverse()
+    b = int("".join(map(str,l)),2)
+    print ("p=",hex(b))
+    return b
+
+def num2poly(h):
+    s = "{:b}".format(h)[::-1]
+    coef = []
+    coef.extend(map(int,s))
+    p = R(coef)
+    return p
+
 #msg = [0xEF, 0x44, 0x82, 0x81]
 #compute_using_carryless_CRC(msg)
 #msg.reverse()
@@ -77,5 +91,7 @@ a*P+M
 
 # CRC32 : 100000100110000010001110110110111
 CRC32 = x^32 + x^26 + x^23 + x^22 + x^16 + x^12 + x^11 + x^10 + x^8 + x^7 + x^5 + x^4 + x^2 + x + 1
-computeCRC(msg,CRC32)
+
+c=computeCRC(msg,CRC32)
+poly2hex(c)
 
