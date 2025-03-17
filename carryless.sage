@@ -66,6 +66,14 @@ def num2poly(h):
     p = R(coef)
     return p
 
+def clmulh(a,b):
+    p,_ = (a*b).quo_rem(x^32)
+    return p
+
+def clmull(a,b):
+    _,p=(a*b).quo_rem(x^32)
+    return p
+
 #msg = [0xEF, 0x44, 0x82, 0x81]
 #compute_using_carryless_CRC(msg)
 #msg.reverse()
@@ -95,3 +103,6 @@ CRC32 = x^32 + x^26 + x^23 + x^22 + x^16 + x^12 + x^11 + x^10 + x^8 + x^7 + x^5 
 c=computeCRC(msg,CRC32)
 poly2hex(c)
 
+QT,_=(x^64).quo_rem(CRC32)
+clmull(clmulh(x^8 + x^7 + x^6 + x^5 + x^3 + x^2 + x + 1,QT),CRC32)
+((x^8 + x^7 + x^6 + x^5 + x^3 + x^2 + x + 1)*x^32).quo_rem(CRC32)
