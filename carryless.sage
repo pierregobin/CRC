@@ -74,6 +74,7 @@ def clmull(a,b):
     _,p=(a*b).quo_rem(x^32)
     return p
 
+
 #msg = [0xEF, 0x44, 0x82, 0x81]
 #compute_using_carryless_CRC(msg)
 #msg.reverse()
